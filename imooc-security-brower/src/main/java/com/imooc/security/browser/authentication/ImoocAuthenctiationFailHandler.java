@@ -1,6 +1,7 @@
 package com.imooc.security.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.imooc.security.browser.support.SimpleResponse;
 import com.imooc.security.core.properties.LoginType;
 import com.imooc.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class ImoocAuthenctiationFailHandler extends SimpleUrlAuthenticationFailu
         if(LoginType.JSON.equals((securityProperties.getBrowser().getLoginType()))){
             httpServletResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             httpServletResponse.setContentType("application/json;charset=UTF-8");
-            httpServletResponse.getWriter().write(objectMapper.writeValueAsString(e));
+            httpServletResponse.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(e.getMessage())));
         }else{
             //返回springsecurity 默认的处理方式。返回错误页面
             super.onAuthenticationFailure(httpServletRequest,httpServletResponse,e);

@@ -22,4 +22,10 @@ imooc:
   security:
     browser:
       loginType: REDIRECT
-#    enabled: false
+    enabled: false
+    #图形验证码的长度
+    code:
+      image:
+        length: 6
+        width: 100
+        url: /user,/user/*
